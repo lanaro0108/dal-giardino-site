@@ -198,65 +198,55 @@ document.addEventListener("DOMContentLoaded", () => {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // 6. Interatividade e Filtros da Cartela de Vinhos (SOLID: Funções curtas e com responsabilidade única)
+  // 6. Interatividade e Filtros da Carta de Vinhos (SOLID: Funções curtas e com responsabilidade única)
 
-  // Determina se um card individual de vinho deve ser exibido
-  function filtrarVinho(card, categoriaSelecionada) {
-    const categoriaCard = card.getAttribute("data-category");
-    const deveExibir = categoriaSelecionada === "todos" || categoriaCard === categoriaSelecionada;
+  // Determina se um item individual de vinho deve ser exibido
+  function filtrarVinho(item, categoriaSelecionada) {
+    const categoriaItem = item.getAttribute("data-category");
+    const deveExibir = categoriaSelecionada === "todos" || categoriaItem === categoriaSelecionada;
     
     if (deveExibir) {
-      card.classList.remove("wine-hidden");
+      item.classList.remove("wine-hidden");
     } else {
-      card.classList.add("wine-hidden");
+      item.classList.add("wine-hidden");
     }
   }
 
-  // Atualiza o estado visual e atributos ARIA dos botões de filtro
+  // Atualiza o estado visual e semântico dos botões da carta
   function atualizarBotoesFiltro(botoes, botaoAtivo) {
     botoes.forEach(btn => {
-      const estaAtivo = btn === botaoAtivo;
-      btn.classList.toggle("active", estaAtivo);
-      btn.setAttribute("aria-selected", estaAtivo ? "true" : "false");
+      btn.classList.toggle("active", btn === botaoAtivo);
     });
   }
 
-  // Aplica o filtro selecionado a todos os cards do catálogo
-  function aplicarFiltroVinhos(categoria, cards) {
-    cards.forEach(card => filtrarVinho(card, categoria));
+  // Aplica o filtro selecionado a todos os rótulos
+  function aplicarFiltroVinhos(categoria, itens) {
+    itens.forEach(item => filtrarVinho(item, categoria));
   }
 
-  // Inicializa os ouvintes de evento dos botões de filtro
+  // Inicializa a filtragem por categoria na carta de vinhos
   function inicializarFiltroCartela() {
     const filterButtons = document.querySelectorAll(".cartela-filter-btn");
-    const wineCards = document.querySelectorAll(".wine-card");
+    const wineItems = document.querySelectorAll(".wine-item");
 
-    if (!filterButtons.length || !wineCards.length) return;
+    if (!filterButtons.length || !wineItems.length) return;
 
     filterButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         const categoria = btn.getAttribute("data-filter");
         atualizarBotoesFiltro(filterButtons, btn);
-        aplicarFiltroVinhos(categoria, wineCards);
+        aplicarFiltroVinhos(categoria, wineItems);
       });
     });
   }
 
-  // 7. Redirecionamento Suave e Destaque Visual para a Cartela de Vinhos
+  // 7. Redirecionamento Suave para a Carta de Vinhos
 
-  // Aplica animação de destaque temporária na cartela
-  function animarDestaqueCartela(secao) {
-    secao.classList.remove("highlight-pulse");
-    // Força reflow para reiniciar animação caso já tenha sido executada
-    void secao.offsetWidth;
-    secao.classList.add("highlight-pulse");
-  }
-
-  // Executa a rolagem suave com compensação para a barra fixa superior
+  // Executa a rolagem suave com compensação para o cabeçalho fixo
   function rolarParaCartela(secao) {
     const cabecalhoAltura = document.querySelector(".site-header")?.offsetHeight || 80;
     const topbarAltura = document.querySelector(".topbar")?.offsetHeight || 40;
-    const offsetTotal = cabecalhoAltura + topbarAltura + 15;
+    const offsetTotal = cabecalhoAltura + topbarAltura + 10;
     
     const posicaoAlvo = secao.getBoundingClientRect().top + window.pageYOffset - offsetTotal;
     window.scrollTo({
@@ -265,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Configura os botões de redirecionamento para a cartela
+  // Configura os links que direcionam para a carta de vinhos
   function inicializarRedirecionamentoVinhos() {
     const gatilhosVinho = document.querySelectorAll('a[href="#cartela-vinhos"]');
     const secaoCartela = document.getElementById("cartela-vinhos");
@@ -276,9 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", (evento) => {
         evento.preventDefault();
         rolarParaCartela(secaoCartela);
-        animarDestaqueCartela(secaoCartela);
 
-        // Atualiza o histórico de navegação sem recarregar a página
+        // Atualiza a URL sem recarregar a página
         if (history.pushState) {
           history.pushState(null, null, "#cartela-vinhos");
         }

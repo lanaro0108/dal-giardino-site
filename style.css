@@ -1078,294 +1078,194 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   SEÇÃO: CARTELA DE VINHOS INTERATIVA ("LA CARTA DEI VINI")
+   SEÇÃO: CARTA DE VINHOS EDITORIAL ("LA CARTA DEI VINI")
    ========================================================================== */
 .cartela-section {
-  padding: clamp(80px, 9vw, 120px) 0;
+  padding: clamp(70px, 8vw, 110px) 0;
   background-color: var(--c-parchment);
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
-  position: relative;
 }
 
 .cartela-header {
   text-align: center;
-  max-width: 780px;
-  margin: 0 auto 40px;
+  max-width: 760px;
+  margin: 0 auto 44px;
 }
 
 .cartela-subtitle {
   font-size: 1.05rem;
   color: var(--c-ink-soft);
-  line-height: 1.7;
-  margin: 12px auto 30px;
+  line-height: 1.65;
+  margin: 10px auto 28px;
 }
 
-/* Filtros de Categoria da Cartela */
-.cartela-filter-tabs {
+/* Navegação e Filtros Editoriais */
+.cartela-filter-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 40px;
+  gap: 8px 24px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
 }
 
 .cartela-filter-btn {
-  background: var(--c-card-bg);
-  border: 1px solid var(--border-medium);
-  border-radius: 999px;
-  padding: 10px 22px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--c-ink-soft);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 6px 4px;
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--c-ink-muted);
   cursor: pointer;
+  letter-spacing: 0.3px;
   transition: var(--transition-smooth);
 }
 
 .cartela-filter-btn:hover {
-  border-color: var(--c-cypress);
   color: var(--c-cypress);
-  transform: translateY(-2px);
 }
 
 .cartela-filter-btn.active {
-  background: var(--c-cypress);
-  border-color: var(--c-cypress);
-  color: #ffffff;
-  box-shadow: 0 4px 16px rgba(27, 56, 40, 0.28);
+  color: var(--c-cypress);
+  font-weight: 700;
+  border-bottom-color: var(--c-cypress);
 }
 
-/* Grade de Rótulos */
-.wine-catalog-grid {
+/* Grade de Vinhos em Estilo Caderno Gastronômico */
+.wine-folio {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
-  margin-bottom: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 36px 48px;
+  margin-bottom: 48px;
 }
 
-/* Card Individual de Vinho */
-.wine-card {
-  background: var(--c-card-bg);
-  border-radius: 12px;
-  padding: 26px 22px;
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-soft);
+/* Item Individual da Carta de Vinhos */
+.wine-item {
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.3s ease;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-light);
+  transition: opacity 0.25s ease;
 }
 
-.wine-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--border-gold);
-}
-
-.wine-card.wine-hidden {
+.wine-item.wine-hidden {
   display: none !important;
 }
 
-.wine-card-top {
+.wine-item-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
-/* Badges e Identificadores de Estilo */
-.wine-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  padding: 4px 10px;
-  border-radius: 6px;
+.wine-item-meta-col {
+  flex: 1;
 }
 
-.badge-red {
-  background: rgba(143, 38, 40, 0.12);
-  color: var(--c-chianti);
-}
-
-.badge-white {
-  background: rgba(197, 155, 76, 0.16);
-  color: #8c631a;
-}
-
-.badge-rose {
-  background: rgba(220, 100, 120, 0.14);
-  color: #a82e46;
-}
-
-.badge-sparkling {
-  background: rgba(27, 56, 40, 0.12);
-  color: var(--c-cypress);
-}
-
-.badge-sweet {
-  background: rgba(181, 137, 0, 0.14);
-  color: #8c6700;
-}
-
-.wine-origin {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--c-ink-muted);
-}
-
-.wine-name {
+.wine-item-title {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.22rem;
+  font-weight: 600;
   color: var(--c-cypress-dark);
   line-height: 1.25;
-  margin-bottom: 4px;
 }
 
-.wine-producer {
-  font-size: 0.8rem;
-  color: var(--c-gold-dark);
-  text-transform: uppercase;
+.wine-item-sub {
+  font-size: 0.82rem;
+  color: var(--c-ink-muted);
+  margin-top: 4px;
+  letter-spacing: 0.2px;
+}
+
+.wine-item-class {
+  font-size: 0.75rem;
+  font-weight: 700;
   letter-spacing: 0.8px;
-  font-weight: 600;
-  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: var(--c-gold-dark);
+  white-space: nowrap;
 }
 
-.wine-grapes {
-  font-size: 0.85rem;
-  color: var(--c-ink-soft);
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed var(--border-light);
-}
-
-.wine-notes {
-  font-size: 0.9rem;
+.wine-item-notes {
+  font-size: 0.91rem;
   color: var(--c-ink-soft);
   line-height: 1.6;
-  margin-bottom: 16px;
-  flex-grow: 1;
+  margin-bottom: 8px;
 }
 
-/* Área de Harmonização Sugerida */
-.wine-pairing {
-  background: rgba(27, 56, 40, 0.04);
-  border-radius: 8px;
-  padding: 10px 14px;
-  border-left: 3px solid var(--c-gold);
+.wine-item-pair {
   font-size: 0.84rem;
-  line-height: 1.45;
+  color: var(--c-cypress-light);
+  font-style: italic;
+  line-height: 1.5;
 }
 
-.pairing-label {
-  font-weight: 700;
-  color: var(--c-cypress);
-  margin-right: 4px;
-}
-
-.pairing-text {
-  color: var(--c-ink-soft);
-}
-
-/* Caixa de Ação do Sommelier e Download da Carta */
-.wine-action-box {
+/* Faixa de Rodapé da Carta */
+.wine-footer-box {
   background: var(--c-cypress-dark);
   color: #ffffff;
-  border-radius: 14px;
-  padding: 36px 40px;
+  border-radius: 4px;
+  padding: 32px 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 24px;
-  box-shadow: 0 16px 40px rgba(18, 37, 26, 0.18);
-  border: 1px solid rgba(197, 155, 76, 0.3);
+  gap: 20px;
 }
 
-.wine-action-text {
-  max-width: 650px;
+.wine-footer-info {
+  max-width: 580px;
 }
 
-.wine-action-text h3 {
+.wine-footer-info h3 {
   font-family: var(--font-serif);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 400;
   color: #ffffff;
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
-.wine-action-text p {
-  font-size: 0.95rem;
+.wine-footer-info p {
+  font-size: 0.92rem;
   color: #d1dacb;
   line-height: 1.6;
 }
 
-.wine-action-buttons {
+.wine-footer-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.btn-outline-dark {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px 24px;
-  border-radius: 4px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.btn-outline-dark:hover {
-  background: #ffffff;
-  color: var(--c-cypress-dark);
-  border-color: #ffffff;
-  transform: translateY(-2px);
-}
-
-/* Efeito de Destaque ao Redirecionar para a Cartela */
-.highlight-pulse {
-  animation: pulseWineSection 1.2s ease-out;
-}
-
-@keyframes pulseWineSection {
-  0% {
-    box-shadow: 0 0 0 0 rgba(197, 155, 76, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 0 16px rgba(197, 155, 76, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(197, 155, 76, 0);
-  }
-}
-
 @media (max-width: 768px) {
-  .wine-action-box {
+  .cartela-filter-nav {
+    gap: 6px 14px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .cartela-filter-btn {
+    white-space: nowrap;
+    font-size: 0.88rem;
+  }
+  .wine-folio {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .wine-footer-box {
     padding: 24px 20px;
   }
-  .wine-action-buttons {
+  .wine-footer-actions {
     width: 100%;
     flex-direction: column;
   }
-  .wine-action-buttons .btn,
-  .wine-action-buttons .btn-outline-dark {
+  .wine-footer-actions .btn {
     width: 100%;
     text-align: center;
-  }
-  .cartela-filter-tabs {
-    gap: 8px;
-  }
-  .cartela-filter-btn {
-    padding: 8px 16px;
-    font-size: 0.84rem;
   }
 }
 
