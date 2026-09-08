@@ -1,0 +1,1828 @@
+/* ==========================================================================
+   DAL GIARDINO — Cozinha Italiana, Empório & Adega
+   Design Sistema Editorial & Gastronômico Artesanal
+   ========================================================================== */
+
+:root {
+  /* Paleta Nobre & Italiana */
+  --c-cypress: #1b3828;
+  --c-cypress-dark: #12251a;
+  --c-cypress-light: #2c533c;
+  
+  --c-chianti: #8f2628;
+  --c-terracotta: #ab4436;
+  
+  --c-gold: #c59b4c;
+  --c-gold-bright: #dfb66d;
+  --c-gold-subtle: #ebd7b2;
+  --c-gold-dark: #967432;
+  
+  --c-travertine: #fcfaf7;
+  --c-parchment: #f6f1e7;
+  --c-parchment-deep: #eee5d3;
+  --c-card-bg: #ffffff;
+  
+  --c-ink: #22201d;
+  --c-ink-soft: #4a4742;
+  --c-ink-muted: #726e66;
+  
+  --border-light: rgba(140, 115, 80, 0.14);
+  --border-medium: rgba(140, 115, 80, 0.26);
+  --border-gold: rgba(197, 155, 76, 0.4);
+
+  --shadow-soft: 0 10px 30px rgba(35, 30, 20, 0.05);
+  --shadow-card: 0 15px 45px rgba(30, 25, 15, 0.07);
+  --shadow-hover: 0 20px 50px rgba(27, 56, 40, 0.12);
+
+  /* Tipografia */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-script: "Alex Brush", cursive;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset Básico */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--c-travertine);
+  color: var(--c-ink);
+  line-height: 1.7;
+  font-weight: 400;
+  overflow-x: hidden;
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 40px);
+  padding-right: clamp(20px, 4vw, 40px);
+}
+
+/* Acessibilidade */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 20px;
+  background: var(--c-cypress);
+  color: #fff;
+  padding: 12px 20px;
+  z-index: 1000;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 20px;
+}
+
+/* ==========================================================================
+   TOPBAR DE HOSPITALIDADE
+   ========================================================================== */
+.topbar {
+  background-color: var(--c-cypress-dark);
+  color: var(--c-gold-subtle);
+  font-size: 0.82rem;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(197, 155, 76, 0.2);
+  position: relative;
+  z-index: 40;
+}
+
+.topbar-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.topbar-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #dce3d6;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-sep {
+  color: rgba(197, 155, 76, 0.5);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #55c777;
+  display: inline-block;
+  box-shadow: 0 0 6px #55c777;
+}
+
+.status-badge.closed .status-dot {
+  background-color: #e07260;
+  box-shadow: 0 0 6px #e07260;
+}
+
+.topbar-phone {
+  color: var(--c-gold-bright);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.topbar-phone:hover {
+  color: #fff;
+}
+
+/* ==========================================================================
+   CABEÇALHO NOBRE COM ICON E TIPOGRAFIA
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(252, 250, 247, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  transition: var(--transition-smooth);
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px clamp(20px, 4vw, 40px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.08));
+}
+
+.brand:hover .brand-logo {
+  transform: scale(1.04);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  color: var(--c-cypress);
+  line-height: 1.05;
+  letter-spacing: -0.3px;
+}
+
+.brand-sub {
+  font-size: 0.72rem;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--c-chianti);
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+}
+
+.nav-menu a:not(.btn) {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  letter-spacing: 0.3px;
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-menu a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--c-chianti);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:not(.btn):hover {
+  color: var(--c-chianti);
+}
+
+.nav-menu a:not(.btn):hover::after {
+  width: 100%;
+}
+
+.btn-reserve-nav {
+  background: var(--c-cypress);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.btn-reserve-nav:hover {
+  background: var(--c-cypress-dark);
+  color: var(--c-gold-bright);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-toggle .bar {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: var(--c-cypress);
+  margin: 6px 0;
+  transition: var(--transition-smooth);
+}
+
+/* ==========================================================================
+   HERO GASTRONÔMICO EDITORIAL
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 86vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 100px 24px 70px;
+  overflow: hidden;
+}
+
+.hero-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 35%;
+  transform: scale(1.03);
+  filter: brightness(0.62) saturate(1.15);
+  animation: heroKenBurns 25s infinite alternate ease-in-out;
+  z-index: 1;
+}
+
+@keyframes heroKenBurns {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.08); }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(18, 37, 26, 0.5) 0%, rgba(14, 25, 18, 0.88) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-script {
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  color: var(--c-gold-bright);
+  line-height: 1;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 7vw, 5.6rem);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1.08;
+  margin-bottom: 22px;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: #e8ebe4;
+  font-weight: 300;
+  max-width: 680px;
+  margin: 0 auto 34px;
+  line-height: 1.65;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 38px;
+}
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #c59b4c 0%, #a87e35 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(197, 155, 76, 0.35);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #d8ac5a 0%, #b88c3e 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(197, 155, 76, 0.45);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline:hover {
+  background: #ffffff;
+  color: var(--c-cypress);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.hero-pillars-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  letter-spacing: 0.6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 24px;
+  max-width: 780px;
+}
+
+.hero-pillars-line .dot {
+  color: var(--c-gold-bright);
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.hero-scroll-indicator .mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  position: relative;
+}
+
+.hero-scroll-indicator .mouse-icon::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background-color: var(--c-gold-bright);
+  border-radius: 2px;
+  animation: scrollWheel 2s infinite ease-in-out;
+}
+
+@keyframes scrollWheel {
+  0% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}
+
+/* ==========================================================================
+   ESTILO EDITORIAL COMUM
+   ========================================================================== */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: 2.1rem;
+  color: var(--c-gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.section-tag-light {
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: 2.1rem;
+  color: var(--c-gold-bright);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.section-tag-gold {
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--c-gold-bright);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.18;
+  color: var(--c-cypress);
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+/* ==========================================================================
+   SEÇÃO: A CASA & O JARDIM
+   ========================================================================== */
+.casa-section {
+  padding: clamp(80px, 10vw, 130px) 0;
+  background: var(--c-travertine);
+  position: relative;
+}
+
+.casa-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.casa-visual {
+  position: relative;
+  padding-bottom: 50px;
+}
+
+.main-frame {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+}
+
+.main-frame img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.main-frame:hover img {
+  transform: scale(1.03);
+}
+
+.stamp-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(18, 37, 26, 0.92);
+  border: 1px solid var(--c-gold);
+  color: var(--c-gold-bright);
+  padding: 10px 16px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.stamp-year {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.stamp-text {
+  font-size: 0.68rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.secondary-frame {
+  position: absolute;
+  bottom: 0;
+  right: -30px;
+  width: 58%;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 6px solid var(--c-travertine);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-frame img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.story-lead p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--c-ink);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.story-body {
+  font-size: 0.98rem;
+  color: var(--c-ink-soft);
+  margin-bottom: 30px;
+}
+
+.casa-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 34px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.feature-info h3 {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--c-cypress);
+  margin-bottom: 4px;
+}
+
+.feature-info p {
+  font-size: 0.86rem;
+  color: var(--c-ink-muted);
+  line-height: 1.55;
+}
+
+.link-editorial {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: var(--c-chianti);
+  border-bottom: 1px solid var(--c-chianti);
+  padding-bottom: 4px;
+}
+
+.link-editorial:hover {
+  color: var(--c-cypress);
+  border-color: var(--c-cypress);
+  gap: 12px;
+}
+
+/* ==========================================================================
+   FAIXA DE FILOSOFIA GASTRONÔMICA & ÁGUA MINERAL
+   ========================================================================== */
+.filosofia-strip {
+  background: linear-gradient(180deg, #183324 0%, #12251a 100%);
+  color: #ffffff;
+  padding: clamp(80px, 9vw, 120px) 0;
+  position: relative;
+}
+
+.filosofia-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+
+.filosofia-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.filosofia-desc {
+  font-size: 1.05rem;
+  color: #ccd7c7;
+  line-height: 1.65;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.pillar-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(197, 155, 76, 0.22);
+  border-radius: 8px;
+  padding: 34px 26px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.pillar-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
+}
+
+.pillar-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.pillar-card p {
+  font-size: 0.88rem;
+  color: #cfd8c9;
+  line-height: 1.65;
+}
+
+.pillar-card p strong {
+  color: var(--c-gold-bright);
+}
+
+/* ==========================================================================
+   SEÇÃO: CARDÁPIO INTERATIVO ("IL MENU")
+   ========================================================================== */
+.menu-section {
+  padding: clamp(80px, 10vw, 130px) 0;
+  background-color: var(--c-travertine);
+  position: relative;
+}
+
+.menu-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 50px;
+}
+
+.menu-intro {
+  font-size: 1.05rem;
+  color: var(--c-ink-soft);
+  margin-top: 10px;
+}
+
+/* Abas de Navegação */
+.menu-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--c-parchment);
+  padding: 6px;
+  border-radius: 99px;
+  border: 1px solid var(--border-medium);
+  margin-top: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menu-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 99px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.menu-tab-btn:hover {
+  color: var(--c-cypress);
+}
+
+.menu-tab-btn.active {
+  background: var(--c-cypress);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(27, 56, 40, 0.2);
+}
+
+/* Painéis de Pratos */
+.menu-panel {
+  display: none;
+  animation: fadeInPanel 0.4s ease-in-out forwards;
+}
+
+.menu-panel.active {
+  display: block;
+}
+
+@keyframes fadeInPanel {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pizza-banner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 30px;
+  align-items: center;
+  background: var(--c-parchment);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 34px;
+}
+
+.pizza-banner-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.pizza-banner-content {
+  padding: 24px 30px 24px 0;
+}
+
+.banner-kicker {
+  display: block;
+  font-size: 0.74rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-chianti);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.pizza-banner-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--c-cypress);
+  margin-bottom: 8px;
+}
+
+.pizza-banner-content p {
+  font-size: 0.92rem;
+  color: var(--c-ink-soft);
+  line-height: 1.6;
+}
+
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.dish-item {
+  background: var(--c-card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.dish-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--border-medium);
+}
+
+.dish-header {
+  margin-bottom: 8px;
+}
+
+.dish-title {
+  font-family: var(--font-serif);
+  font-size: 1.22rem;
+  color: var(--c-cypress);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dish-desc {
+  font-size: 0.9rem;
+  color: var(--c-ink-muted);
+  line-height: 1.6;
+}
+
+/* Card de Download dos PDFs */
+.menu-downloads-card {
+  margin-top: 60px;
+  background: var(--c-parchment);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: clamp(30px, 5vw, 45px);
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.pdf-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold-dark);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.downloads-info h3 {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--c-cypress);
+  margin-bottom: 8px;
+}
+
+.downloads-info p {
+  font-size: 0.92rem;
+  color: var(--c-ink-soft);
+}
+
+.downloads-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.btn-download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--c-cypress);
+  transition: var(--transition-smooth);
+}
+
+.btn-download:hover {
+  background: var(--c-cypress);
+  color: #ffffff;
+  border-color: var(--c-cypress);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   SEÇÃO: A ADEGA ("LA NOSTRA CANTINA")
+   ========================================================================== */
+.adega-section {
+  position: relative;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  padding: clamp(90px, 10vw, 130px) 0;
+  overflow: hidden;
+}
+
+.adega-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 40%;
+  filter: brightness(0.55);
+  z-index: 1;
+}
+
+.adega-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(16, 26, 19, 0.95) 0%, rgba(20, 32, 24, 0.78) 50%, rgba(14, 23, 17, 0.92) 100%);
+  z-index: 2;
+}
+
+.adega-container {
+  position: relative;
+  z-index: 3;
+}
+
+.adega-content {
+  max-width: 680px;
+}
+
+.adega-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.adega-lead {
+  font-size: 1.1rem;
+  color: #e0e6db;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.adega-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 36px;
+  border-left: 2px solid var(--c-gold);
+  padding-left: 20px;
+}
+
+.adega-feature strong {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--c-gold-bright);
+  font-family: var(--font-serif);
+  margin-bottom: 3px;
+}
+
+.adega-feature span {
+  font-size: 0.88rem;
+  color: #cfd6ca;
+  line-height: 1.5;
+}
+
+.adega-cta-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   SEÇÃO: GALERIA FOTOGRÁFICA
+   ========================================================================== */
+.galeria-section {
+  padding: clamp(80px, 10vw, 130px) 0;
+  background: var(--c-travertine);
+}
+
+.galeria-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 50px;
+}
+
+.galeria-desc {
+  font-size: 1.05rem;
+  color: var(--c-ink-soft);
+  margin-top: 8px;
+}
+
+.photo-mosaic {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 270px;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.mosaic-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-light);
+}
+
+.mosaic-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mosaic-item:hover img {
+  transform: scale(1.06);
+}
+
+.mosaic-item figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 18px 14px;
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 37, 26, 0.88) 100%);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: var(--transition-smooth);
+}
+
+.mosaic-item:hover figcaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mosaic-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.mosaic-wide {
+  grid-column: span 2;
+}
+
+.instagram-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--c-parchment);
+  border: 1px solid var(--border-medium);
+  padding: 16px 28px;
+  border-radius: 6px;
+  font-size: 0.94rem;
+  color: var(--c-ink-soft);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.link-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--c-chianti);
+}
+
+.link-instagram:hover {
+  color: var(--c-cypress);
+}
+
+/* ==========================================================================
+   SEÇÃO: RESERVAS & EVENTOS
+   ========================================================================== */
+.reservas-section {
+  padding: clamp(80px, 10vw, 130px) 0;
+  background: linear-gradient(180deg, var(--c-parchment) 0%, var(--c-travertine) 100%);
+  position: relative;
+}
+
+.reservas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(30px, 5vw, 60px);
+  align-items: stretch;
+}
+
+.reserva-instant-card {
+  background: linear-gradient(145deg, #1b3828 0%, #13271c 100%);
+  color: #ffffff;
+  padding: clamp(34px, 5vw, 48px);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(197, 155, 76, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.reserva-card-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.reserva-card-text {
+  font-size: 0.95rem;
+  color: #d6ded2;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.quick-booking-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.widget-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--c-gold-bright);
+  margin-bottom: 6px;
+}
+
+.custom-select, .custom-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.custom-select option {
+  background-color: #1a3224;
+  color: #fff;
+}
+
+.custom-select:focus, .custom-input:focus {
+  border-color: var(--c-gold-bright);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.btn-whatsapp-large {
+  background: #25d366;
+  color: #0b3d1c;
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 15px 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+  transition: var(--transition-smooth);
+}
+
+.btn-whatsapp-large:hover {
+  background: #2fe06f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
+}
+
+.quick-note {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Formulário de Eventos */
+.reserva-form-card {
+  background: var(--c-card-bg);
+  padding: clamp(34px, 5vw, 48px);
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-card);
+}
+
+.form-title {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: var(--c-cypress);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.form-text {
+  font-size: 0.92rem;
+  color: var(--c-ink-soft);
+  margin-bottom: 26px;
+  line-height: 1.6;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--c-cypress);
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  background: var(--c-travertine);
+  font-size: 0.92rem;
+  color: var(--c-ink);
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--c-cypress);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(27, 56, 40, 0.08);
+}
+
+.btn-submit {
+  background: var(--c-chianti);
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-submit:hover {
+  background: #7a1d1f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(143, 38, 40, 0.25);
+}
+
+/* ==========================================================================
+   SEÇÃO: LOCALIZAÇÃO, HORÁRIOS & CONTATO
+   ========================================================================== */
+.contato-section {
+  padding: clamp(80px, 10vw, 130px) 0;
+  background: var(--c-travertine);
+  border-top: 1px solid var(--border-light);
+}
+
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(36px, 6vw, 70px);
+  align-items: center;
+}
+
+.info-block {
+  margin-bottom: 28px;
+}
+
+.info-block h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--c-cypress);
+  margin-bottom: 10px;
+}
+
+.info-block address {
+  font-style: normal;
+  color: var(--c-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.landmark {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--c-cypress-light);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.link-maps {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--c-chianti);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--c-chianti);
+  padding-bottom: 2px;
+}
+
+.link-maps:hover {
+  color: var(--c-cypress);
+  border-color: var(--c-cypress);
+}
+
+.horarios-tabela {
+  background: var(--c-parchment);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 16px 20px;
+}
+
+.horario-linha {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.88rem;
+}
+
+.horario-linha:last-child {
+  border-bottom: none;
+}
+
+.horario-linha .dia {
+  font-weight: 600;
+  color: var(--c-cypress);
+}
+
+.horario-linha .horas {
+  color: var(--c-ink-soft);
+}
+
+.horario-linha.fechado .horas {
+  color: #b0443b;
+  font-weight: 500;
+}
+
+.phone-link {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: var(--c-cypress);
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.phone-link:hover {
+  color: var(--c-chianti);
+}
+
+.phone-desc {
+  font-size: 0.86rem;
+  color: var(--c-ink-muted);
+}
+
+.map-frame {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-medium);
+}
+
+.map-frame iframe {
+  display: block;
+}
+
+.map-card-overlay {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 12px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.map-card-overlay h4 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--c-cypress);
+  margin-bottom: 2px;
+}
+
+.map-card-overlay p {
+  font-size: 0.78rem;
+  color: var(--c-ink-muted);
+  margin-bottom: 6px;
+}
+
+.map-card-overlay a {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--c-chianti);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BOTÃO FLUTUANTE DISCRETO
+   ========================================================================== */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99;
+  background: #1b3828;
+  color: var(--c-gold-bright);
+  border: 1px solid var(--c-gold);
+  padding: 12px 22px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: var(--transition-smooth);
+}
+
+.floating-whatsapp:hover {
+  transform: translateY(-3px);
+  background: #12251a;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   RODAPÉ NOBRE
+   ========================================================================== */
+.site-footer {
+  background: #12251a;
+  color: #d1d8cc;
+  padding: 70px 0 0;
+  border-top: 2px solid var(--c-gold);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.footer-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.4));
+}
+
+.footer-brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  color: var(--c-gold-bright);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.footer-tagline {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #aeb8a6;
+  max-width: 380px;
+}
+
+.footer-nav h4, .footer-contact h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--c-gold-bright);
+  margin-bottom: 20px;
+}
+
+.footer-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav a {
+  font-size: 0.88rem;
+  color: #cad3c4;
+}
+
+.footer-nav a:hover {
+  color: var(--c-gold-bright);
+  padding-left: 4px;
+}
+
+.footer-contact p {
+  font-size: 0.88rem;
+  color: #cad3c4;
+  margin-bottom: 10px;
+}
+
+.footer-contact a {
+  color: var(--c-gold-bright);
+}
+
+.footer-bottom {
+  padding: 24px 0;
+  font-size: 0.82rem;
+  color: #8c9684;
+}
+
+.footer-bottom-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.back-to-top {
+  color: var(--c-gold-bright);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  letter-spacing: 1px;
+}
+
+.back-to-top:hover {
+  color: #fff;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(252, 250, 247, 0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-medium);
+    flex-direction: column;
+    padding: 24px clamp(20px, 4vw, 40px);
+    gap: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-menu a:not(.btn) {
+    font-size: 1.05rem;
+    padding: 8px 0;
+    width: 100%;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .btn-reserve-nav {
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+    padding: 14px;
+  }
+
+  .casa-grid, .reservas-grid, .contato-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .secondary-frame {
+    position: static;
+    width: 100%;
+    margin-top: 16px;
+    border: none;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .menu-downloads-card {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-mosaic {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-container {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .topbar-info {
+    display: none;
+  }
+
+  .brand-logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .brand-title {
+    font-size: 1.3rem;
+  }
+
+  .brand-sub {
+    font-size: 0.62rem;
+    letter-spacing: 1.2px;
+  }
+
+  .hero {
+    min-height: 80vh;
+    padding-top: 70px;
+    padding-bottom: 60px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pizza-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .pizza-banner-content {
+    padding: 20px;
+  }
+
+  .dishes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .horario-linha {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .floating-whatsapp {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 16px;
+    font-size: 0.78rem;
+  }
+
+  .photo-mosaic {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+/* Envolve a galeria em um 'frame' fechado sem alterar imagens */
+/* photo-mosaic-frame removed to restore original gallery layout */
+
+  .mosaic-large, .mosaic-wide {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
