@@ -4,11 +4,69 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Dal Giardino — Empório, Pizzeria & Trattoria em Americana, SP.">
+  <meta name="theme-color" content="#1b3828">
+  <meta property="og:type" content="restaurant">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Dal Giardino | Empório, Pizzeria & Trattoria">
+  <meta property="og:description" content="Uma mesa italiana entre sabores, encontros e a calma do jardim, em Americana.">
+  <meta property="og:image" content="images/casa-jardim.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="icon.png">
   <title>Dal Giardino | Empório, Pizzeria & Trattoria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Dal Giardino",
+      "description": "Empório, Pizzeria & Trattoria em Americana, SP.",
+      "image": "images/casa-jardim.jpeg",
+      "telephone": "+55 19 98338-2030",
+      "servesCuisine": "Italiana",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Abrahim Abraham, 489",
+        "addressLocality": "Americana",
+        "addressRegion": "SP",
+        "addressCountry": "BR"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "11:30",
+          "closes": "14:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "18:30",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "11:30",
+          "closes": "15:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "18:30",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "11:30",
+          "closes": "16:00"
+        }
+      ]
+    }
+  </script>
 </head>
 <body id="topo">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -26,9 +84,9 @@
         <img class="brand-logo" src="logo.png" alt="Dal Giardino">
         <span class="brand-text"><span class="brand-title">Dal Giardino</span><span class="brand-sub">Empório · Pizzeria · Trattoria</span></span>
       </a>
-      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
-      <nav class="nav-menu" aria-label="Navegação principal">
-        <a href="#casa">A casa</a><a href="#menu">Cardápio</a><a href="#adega">Adega</a><a href="#galeria">Galeria</a><a href="#contato">Contato</a><a class="btn-reserve-nav" href="#reservas">Reservas</a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="primary-navigation" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+      <nav class="nav-menu" id="primary-navigation" aria-label="Navegação principal">
+        <a href="#casa">A casa</a><a href="#menu">Cardápio</a><a href="#adega">Adega</a><a href="#cartela-vinhos">Carta de Vinhos</a><a href="#galeria">Galeria</a><a href="#contato">Contato</a><a class="btn-reserve-nav" href="#reservas">Reservas</a>
       </nav>
     </div>
   </header>
@@ -57,10 +115,236 @@
       <div class="menu-panel" id="pizzas" role="tabpanel" hidden><div class="pizza-banner"><img class="pizza-banner-img" src="images/pizza-forno.jpg" alt="Pizza assada no forno a lenha"><div class="pizza-banner-content"><span class="banner-kicker">Do nosso forno a lenha</span><h3>Pizza napolitana, alma italiana.</h3><p>Massa de longa fermentação, borda leve e ingredientes escolhidos para uma pizza memorável.</p></div></div><div class="dishes-grid"><article class="dish-item"><h3 class="dish-title">Margherita DOP</h3><p class="dish-desc">Tomate italiano, fior di latte, manjericão e azeite extravirgem.</p></article><article class="dish-item"><h3 class="dish-title">Aglio Nero</h3><p class="dish-desc">Creme de alho negro, mozzarella, cogumelos e parmesão.</p></article><article class="dish-item"><h3 class="dish-title">Prosciutto & Brie</h3><p class="dish-desc">Presunto cru, brie, mel e toque de alecrim.</p></article><article class="dish-item"><h3 class="dish-title">Diavola</h3><p class="dish-desc">Linguiça artesanal, pepperoni, pimenta e mozzarella.</p></article></div></div>
       <div class="menu-panel" id="pratos" role="tabpanel" hidden><div class="dishes-grid"><article class="dish-item"><h3 class="dish-title">Risotto ai Funghi & Trufas</h3><p class="dish-desc">Arroz arbóreo, cogumelos selecionados, parmesão e azeite trufado.</p></article><article class="dish-item"><h3 class="dish-title">Filetto Angus</h3><p class="dish-desc">Medalhão ao molho de vinho, risoto de parmesão e legumes.</p></article><article class="dish-item"><h3 class="dish-title">Bacalhau Gadus Morhua</h3><p class="dish-desc">Bacalhau confitado, batatas ao murro, azeitonas e ervas.</p></article><article class="dish-item"><h3 class="dish-title">Gnocchi della Casa</h3><p class="dish-desc">Nhoque artesanal ao molho de tomate italiano e burrata.</p></article></div></div>
       <div class="menu-panel" id="dolci" role="tabpanel" hidden><div class="dishes-grid"><article class="dish-item"><h3 class="dish-title">Tiramisù Tradizionale</h3><p class="dish-desc">Café, mascarpone, biscoitos e cacau em uma receita clássica.</p></article><article class="dish-item"><h3 class="dish-title">Panna Cotta</h3><p class="dish-desc">Panna cotta de baunilha com frutas vermelhas da estação.</p></article><article class="dish-item"><h3 class="dish-title">Negroni Dal Giardino</h3><p class="dish-desc">Nosso clássico italiano, equilibrado e perfumado.</p></article><article class="dish-item"><h3 class="dish-title">Aperol Spritz</h3><p class="dish-desc">Aperol, espumante e água com gás: leve, cítrico e festivo.</p></article></div></div>
-      <div class="menu-downloads-card"><div class="downloads-info"><span class="pdf-tag">Menus completos</span><h3>Leve o menu para a sua mesa.</h3><p>Consulte as opções e novidades da casa. Valores e disponibilidade podem variar.</p></div><div class="downloads-buttons"><a class="btn-download" href="#contato">Menu à la carte <span>→</span></a><a class="btn-download" href="#contato">Festival do risoto <span>→</span></a><a class="btn-download" href="#contato">Carta de vinhos <span>→</span></a><a class="btn-download" href="#contato">Almoço executivo <span>→</span></a></div></div>
+      <div class="menu-downloads-card"><div class="downloads-info"><span class="pdf-tag">Menus completos</span><h3>Leve o menu para a sua mesa.</h3><p>Consulte as opções e novidades da casa. Valores e disponibilidade podem variar.</p></div><div class="downloads-buttons"><a class="btn-download" href="http://dalgiardino.com.br/wp-content/uploads/Cardapio-a-La-Carte-Agosto-de-2026_compressed.pdf" target="_blank" rel="noopener">Menu à la carte <span>↗</span></a><a class="btn-download" href="http://dalgiardino.com.br/wp-content/uploads/Menu-Festival-do-Risoto-Agosto-de-2026_compressed.pdf" target="_blank" rel="noopener">Festival do risoto <span>↗</span></a><a class="btn-download" href="http://dalgiardino.com.br/wp-content/uploads/2026-08-agosto-carda%CC%81pio-parrilla_compressed.pdf" target="_blank" rel="noopener">Menu da parrilla <span>↗</span></a><a class="btn-download btn-download-wine" href="#cartela-vinhos">Carta de vinhos <span>↓</span></a><a class="btn-download" href="http://dalgiardino.com.br/wp-content/uploads/Menu-Executivo-Agosto-de-2026_compressed.pdf" target="_blank" rel="noopener">Almoço executivo <span>↗</span></a></div></div>
     </div></section>
 
-    <section class="adega-section" id="adega"><div class="adega-bg" style="background-image:url('images/adega-ambiente.jpg')"></div><div class="adega-overlay"></div><div class="container adega-container"><div class="adega-content"><span class="section-tag section-tag-light">La nostra cantina</span><h2 class="adega-headline">Uma adega para brindar os bons encontros.</h2><p class="adega-lead">Rótulos nacionais e internacionais escolhidos para harmonizar com a nossa cozinha — e com cada ocasião à mesa.</p><div class="adega-features-list"><div class="adega-feature"><strong>Rótulos selecionados</strong><span>Uma curadoria atenta de vinhos para diferentes paladares.</span></div><div class="adega-feature"><strong>Harmonizações especiais</strong><span>Nossa equipe ajuda você a encontrar a taça ideal.</span></div></div><div class="adega-cta-row"><a class="btn btn-gold" href="#contato">Conheça a carta</a><a class="btn btn-outline-light" href="#reservas">Reserve sua experiência</a></div></div></div></section>
+    <section class="adega-section" id="adega"><div class="adega-bg" style="background-image:url('images/adega-ambiente.jpg')"></div><div class="adega-overlay"></div><div class="container adega-container"><div class="adega-content"><span class="section-tag section-tag-light">La nostra cantina</span><h2 class="adega-headline">Uma adega para brindar os bons encontros.</h2><p class="adega-lead">Rótulos nacionais e internacionais escolhidos para harmonizar com a nossa cozinha — e com cada ocasião à mesa.</p><div class="adega-features-list"><div class="adega-feature"><strong>Rótulos selecionados dos melhores terroirs</strong><span>Vinhos da Itália, França, Portugal, Espanha, Argentina, Chile e dos principais produtores do Brasil.</span></div><div class="adega-feature"><strong>Ambiente climatizado e curadoria sommelier</strong><span>Espaço com controle térmico rigoroso para preservar aromas, frescor e estrutura de cada garrafa.</span></div><div class="adega-feature"><strong>Harmonizações sob medida</strong><span>Nossa equipe e sommelier recomendam a taça ideal para acompanhar pizzas napolitanas, risotos e carnes nobres.</span></div></div><div class="adega-cta-row"><a class="btn btn-gold btn-ver-vinhos" href="#cartela-vinhos" id="btn-ver-vinhos">Ver os vinhos da casa <span>↓</span></a><a class="btn btn-outline-light" href="http://dalgiardino.com.br/wp-content/uploads/06-26-Carta-de-vinhos-nova-junho-2026-1_compressed.pdf" target="_blank" rel="noopener">Baixar carta oficial em PDF <span>↗</span></a></div></div></div></section>
+
+    <!-- SEÇÃO: CARTELA DE VINHOS INTERATIVA -->
+    <section class="cartela-section" id="cartela-vinhos">
+      <div class="container">
+        <div class="cartela-header">
+          <span class="section-tag">Curadoria enológica</span>
+          <h2 class="section-headline">Cartela de Vinhos Dal Giardino</h2>
+          <p class="cartela-subtitle">Rótulos consagrados do Velho e Novo Mundo, selecionados cuidadosamente pelo nosso sommelier para acompanhar com maestria os pratos e pizzas da casa.</p>
+          
+          <div class="cartela-filter-tabs" role="tablist" aria-label="Filtro da cartela de vinhos">
+            <button class="cartela-filter-btn active" type="button" data-filter="todos" role="tab" aria-selected="true">Todos os Rótulos</button>
+            <button class="cartela-filter-btn" type="button" data-filter="tinto" role="tab" aria-selected="false">Tintos</button>
+            <button class="cartela-filter-btn" type="button" data-filter="branco" role="tab" aria-selected="false">Brancos & Rosés</button>
+            <button class="cartela-filter-btn" type="button" data-filter="espumante" role="tab" aria-selected="false">Espumantes & Proseccos</button>
+            <button class="cartela-filter-btn" type="button" data-filter="sobremesa" role="tab" aria-selected="false">Sobremesa & Porto</button>
+          </div>
+        </div>
+
+        <div class="wine-catalog-grid" id="wine-catalog-grid">
+          <!-- Card 1: Brunello di Montalcino -->
+          <article class="wine-card" data-category="tinto">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-red">Tinto Nobre</span>
+              <span class="wine-origin">🇮🇹 Toscana · Itália</span>
+            </div>
+            <h3 class="wine-name">Brunello di Montalcino DOCG</h3>
+            <p class="wine-producer">Castello Banfi / Tenuta di Collosorbo</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Sangiovese Grosso (100%)</div>
+            <p class="wine-notes">Cor rubi profunda com reflexos granada. Aromas complexos de cereja madura, tabaco, couro e especiarias doces. Taninos nobres e final extremamente elegante.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Filetto Angus, carnes nobres da parrilla e risoto trufado.</span>
+            </div>
+          </article>
+
+          <!-- Card 2: Chianti Classico Riserva -->
+          <article class="wine-card" data-category="tinto">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-red">Tinto Clássico</span>
+              <span class="wine-origin">🇮🇹 Toscana · Itália</span>
+            </div>
+            <h3 class="wine-name">Chianti Classico Riserva DOCG</h3>
+            <p class="wine-producer">Rocca delle Macìe / Antinori</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Sangiovese, Canaiolo</div>
+            <p class="wine-notes">Notas elegantes de ameixas vermelhas, violetas silvestres e notas de carvalho toscano. Acidez gastronômica vibrante e equilíbrio memorável.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Pizzas napolitanas tradicionais e massas ao molho pomodoro rústico.</span>
+            </div>
+          </article>
+
+          <!-- Card 3: Barolo DOCG -->
+          <article class="wine-card" data-category="tinto">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-red">Tinto Ícone</span>
+              <span class="wine-origin">🇮🇹 Piemonte · Itália</span>
+            </div>
+            <h3 class="wine-name">Barolo DOCG "Il Re dei Vini"</h3>
+            <p class="wine-producer">Fontanafredda / Pio Cesare</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Nebbiolo (100%)</div>
+            <p class="wine-notes">Complexidade admirável com notas de rosas secas, trufas, alcatrão, especiarias e couro. Encorpado, austero e de persistência grandiosa.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Risotto ai Funghi & Trufas, queijo Grana Padano e carnes curadas.</span>
+            </div>
+          </article>
+
+          <!-- Card 4: Primitivo di Manduria -->
+          <article class="wine-card" data-category="tinto">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-red">Tinto Encorpado</span>
+              <span class="wine-origin">🇮🇹 Puglia · Itália</span>
+            </div>
+            <h3 class="wine-name">Primitivo di Manduria DOP</h3>
+            <p class="wine-producer">San Marzano / Feudi di San Gregorio</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Primitivo</div>
+            <p class="wine-notes">Aromas generosos de ameixa e figos em compota, baunilha, cacau e nuances balsâmicas. Paladar aveludado, quente e sedoso.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Pizza Diavola com pepperoni picante e embutidos artesanais da casa.</span>
+            </div>
+          </article>
+
+          <!-- Card 5: Malbec Reserva -->
+          <article class="wine-card" data-category="tinto">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-red">Tinto Reserva</span>
+              <span class="wine-origin">🇦🇷 Mendoza · Argentina</span>
+            </div>
+            <h3 class="wine-name">Catena Zapata Malbec Reserva</h3>
+            <p class="wine-producer">Bodega Catena Zapata</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Malbec</div>
+            <p class="wine-notes">Expressivo buquê de amoras maduras, mirtilos, notas de violeta e tosta de carvalho francês. Boca cheia, taninos redondos e final sedoso.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Cortes especiais de parrilla e pratos de carnes vermelhas grelhadas.</span>
+            </div>
+          </article>
+
+          <!-- Card 6: Pinot Grigio -->
+          <article class="wine-card" data-category="branco">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-white">Branco Mineral</span>
+              <span class="wine-origin">🇮🇹 Friuli-Venezia Giulia · Itália</span>
+            </div>
+            <h3 class="wine-name">Pinot Grigio delle Venezie DOC</h3>
+            <p class="wine-producer">Santa Margherita / Danzante</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Pinot Grigio</div>
+            <p class="wine-notes">Leve, límpido e muito refrescante. Notas de maçã verde, pera fresca, flor de laranjeira e toque cítrico que convida ao próximo gole.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Burrata al Pesto fresco, antepastos italianos e frutos do mar.</span>
+            </div>
+          </article>
+
+          <!-- Card 7: Chardonnay Gran Reserva -->
+          <article class="wine-card" data-category="branco">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-white">Branco Estruturado</span>
+              <span class="wine-origin">🇧🇷 Pinto Bandeira · Brasil</span>
+            </div>
+            <h3 class="wine-name">Chardonnay Gran Reserva</h3>
+            <p class="wine-producer">Serra Gaúcha / Altos de Pinto Bandeira</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Chardonnay</div>
+            <p class="wine-notes">Passagem por barricas de carvalho resultando em textura untuosa e cremosa. Notas de abacaxi maduro, pêssego branco, favas de baunilha e avelã.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Bacalhau Gadus Morhua confitado e risottos delicados de queijos.</span>
+            </div>
+          </article>
+
+          <!-- Card 8: Rosé de Provence -->
+          <article class="wine-card" data-category="branco">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-rose">Rosé Sofisticado</span>
+              <span class="wine-origin">🇫🇷 Côtes de Provence · França</span>
+            </div>
+            <h3 class="wine-name">Minuty Prestige Côtes de Provence</h3>
+            <p class="wine-producer">Château Minuty</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Grenache, Cinsault, Syrah</div>
+            <p class="wine-notes">Tonalidade salmão pálida brilhante. Aromas sutis de groselha vermelha, pêssego e toques minerais marítimos. Acidez cortante e final límpido.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Brusqueta caprese, saladas com queijo de búfala e noites no jardim.</span>
+            </div>
+          </article>
+
+          <!-- Card 9: Prosecco Superiore Valdobbiadene -->
+          <article class="wine-card" data-category="espumante">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-sparkling">DOCG Brut</span>
+              <span class="wine-origin">🇮🇹 Valdobbiadene · Itália</span>
+            </div>
+            <h3 class="wine-name">Prosecco Superiore DOCG Brut</h3>
+            <p class="wine-producer">Villa Sandi / Bisol</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Glera (100%)</div>
+            <p class="wine-notes">Borbulhas finas e persistentes. Bouquet perfumado de maçã golden, flores de acácia e pera d'água. Paladar seco, cremoso e muito vivaz.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Brindes de celebração, arancini zafferano e polenta croccante.</span>
+            </div>
+          </article>
+
+          <!-- Card 10: Cave Geisse Brut Nature -->
+          <article class="wine-card" data-category="espumante">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-sparkling">Método Tradicional</span>
+              <span class="wine-origin">🇧🇷 Pinto Bandeira · Brasil</span>
+            </div>
+            <h3 class="wine-name">Cave Geisse Brut Nature</h3>
+            <p class="wine-producer">Família Geisse</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Chardonnay, Pinot Noir</div>
+            <p class="wine-notes">Mais de 24 meses sobre leveduras. Complexidade fantástica de pão tostado, damascos e maçã assada, acidez eletrizante e corpo impecável.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Pizzas especiais com prosciutto e queijo brie, além de frutos do mar.</span>
+            </div>
+          </article>
+
+          <!-- Card 11: Vin Santo del Chianti -->
+          <article class="wine-card" data-category="sobremesa">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-sweet">Sobremesa Clássica</span>
+              <span class="wine-origin">🇮🇹 Toscana · Itália</span>
+            </div>
+            <h3 class="wine-name">Vin Santo del Chianti DOC</h3>
+            <p class="wine-producer">Marchesi Antinori</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Trebbiano Toscano, Malvasia</div>
+            <p class="wine-notes">Tradicional vinho toscano elaborado com uvas passificadas. Tons de âmbar, aromas exuberantes de mel, nozes, figos secos e damasco.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Biscoitos cantuccini toscanos, tortas e queijos azuis nobres.</span>
+            </div>
+          </article>
+
+          <!-- Card 12: Porto Tawny 10 Anos -->
+          <article class="wine-card" data-category="sobremesa">
+            <div class="wine-card-top">
+              <span class="wine-badge badge-sweet">Fortificado 10 Anos</span>
+              <span class="wine-origin">🇵🇹 Douro · Portugal</span>
+            </div>
+            <h3 class="wine-name">Porto Tawny 10 Anos</h3>
+            <p class="wine-producer">Taylor's / Graham's</p>
+            <div class="wine-grapes"><strong>Uvas:</strong> Touriga Nacional, Touriga Franca, Tinta Roriz</div>
+            <p class="wine-notes">Maturado em tonéis de carvalho. Notas ricas de frutas secas, avelãs, casca de laranja confeitada e calda de caramelo toffee. Longo e memorável.</p>
+            <div class="wine-pairing">
+              <span class="pairing-label">Harmonização:</span>
+              <span class="pairing-text">Tiramisù tradizionale, palha italiana de avelã e sobremesas de chocolate.</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Box de Apoio ao Cliente e Sommelier -->
+        <div class="wine-action-box">
+          <div class="wine-action-text">
+            <span class="pdf-tag">Carta completa</span>
+            <h3>Deseja conhecer todos os rótulos da safra atual?</h3>
+            <p>Nossa adega física conta com mais de 150 rótulos do Velho e Novo Mundo. Baixe o PDF oficial ou solicite ao nosso sommelier uma recomendação exclusiva para a sua mesa.</p>
+          </div>
+          <div class="wine-action-buttons">
+            <a class="btn btn-gold" href="http://dalgiardino.com.br/wp-content/uploads/06-26-Carta-de-vinhos-nova-junho-2026-1_compressed.pdf" target="_blank" rel="noopener">Baixar Carta Completa (PDF) ↗</a>
+            <a class="btn btn-outline-dark" id="btn-sommelier-whatsapp" href="https://wa.me/5519983382030?text=Ol%C3%A1%21%20Gostaria%20de%20uma%20indica%C3%A7%C3%A3o%20do%20sommelier%20da%20Dal%20Giardino%20para%20harmonizar%20com%20meu%20jantar." target="_blank" rel="noopener">Falar com o Sommelier 💬</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="galeria-section" id="galeria"><div class="container"><div class="galeria-header"><span class="section-tag">Pelos nossos olhos</span><h2 class="section-headline">A beleza está nos detalhes.</h2><p class="galeria-desc">Do jardim ao forno, um pouco dos espaços e sabores que esperam por você.</p></div><div class="photo-mosaic"><figure class="mosaic-item mosaic-large"><img src="images/galeria-ambiente-1.jpg" alt="Ambiente Dal Giardino"><figcaption>Uma casa para celebrar</figcaption></figure><figure class="mosaic-item"><img src="images/pizza-napolitana.jpg" alt="Pizza napolitana"><figcaption>Do forno à mesa</figcaption></figure><figure class="mosaic-item"><img src="images/vinho-detalhe.jpg" alt="Vinho servido à mesa"><figcaption>Brindes especiais</figcaption></figure><figure class="mosaic-item mosaic-wide"><img src="images/risoto-especial.jpg" alt="Risoto especial"><figcaption>Sabores que ficam na memória</figcaption></figure></div><div class="instagram-bar"><span>Acompanhe a rotina, os pratos e as novidades da casa.</span><a class="link-instagram" href="https://www.instagram.com/dalgiardino/" target="_blank" rel="noopener">@dalgiardino ↗</a></div></div></section>
 
@@ -69,7 +353,7 @@
     <section class="contato-section" id="contato"><div class="container contato-grid"><div><span class="section-tag">Venha nos visitar</span><h2 class="section-headline">No coração de Americana.</h2><div class="info-block"><h3>Endereço</h3><address>Rua Abrahim Abraham, 489<br>Americana · São Paulo<span class="landmark">Ao lado do Parque Ecológico</span></address><a class="link-maps" href="https://www.google.com/maps/search/?api=1&query=Rua+Abrahim+Abraham,+489,+Americana,+SP" target="_blank" rel="noopener">Abrir no mapa ↗</a></div><div class="info-block"><h3>Horários</h3><div class="horarios-tabela"><div class="horario-linha fechado"><span class="dia">Segunda</span><span class="horas">Fechado</span></div><div class="horario-linha"><span class="dia">Terça a sexta</span><span class="horas">11h30–14h30 · 18h30–23h</span></div><div class="horario-linha"><span class="dia">Sábado</span><span class="horas">11h30–15h · 18h30–23h</span></div><div class="horario-linha"><span class="dia">Domingo</span><span class="horas">11h30–16h</span></div></div></div><div class="info-block"><h3>Fale com a gente</h3><a class="phone-link" href="tel:+5519983382030">(19) 98338-2030</a><p class="phone-desc">Reservas, informações e eventos pelo WhatsApp.</p></div></div><div class="map-frame"><iframe title="Mapa do Dal Giardino" src="https://www.google.com/maps?q=Rua%20Abrahim%20Abraham%2C%20489%2C%20Americana%2C%20SP&output=embed" width="100%" height="560" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="map-card-overlay"><h4>Dal Giardino</h4><p>Empório, Pizzeria & Trattoria</p><a href="https://www.google.com/maps/search/?api=1&query=Rua+Abrahim+Abraham,+489,+Americana,+SP" target="_blank" rel="noopener">Como chegar ↗</a></div></div></div></section>
   </main>
   <a class="floating-whatsapp" href="https://wa.me/5519983382030" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">WhatsApp <span>↗</span></a>
-  <footer class="site-footer"><div class="container"><div class="footer-content"><div><div class="footer-brand-header"><img class="footer-logo" src="logo.png" alt="Dal Giardino"><span class="footer-brand-name">Dal Giardino</span></div><p class="footer-tagline">Empório, Pizzeria & Trattoria. Uma mesa italiana para encontros que merecem durar.</p></div><nav class="footer-nav" aria-label="Navegação do rodapé"><h4>Descubra</h4><ul><li><a href="#casa">A casa</a></li><li><a href="#menu">Cardápio</a></li><li><a href="#adega">Adega</a></li><li><a href="#reservas">Reservas</a></li></ul></nav><div class="footer-contact"><h4>Contato</h4><p><a href="tel:+5519983382030">(19) 98338-2030</a></p><p>Rua Abrahim Abraham, 489<br>Americana · SP</p><p><a href="https://www.instagram.com/dalgiardino/" target="_blank" rel="noopener">@dalgiardino</a></p></div></div><div class="footer-bottom"><div class="footer-bottom-flex"><span>© <span id="current-year"></span> Dal Giardino. Todos os direitos reservados.</span><a class="back-to-top" href="#topo">Voltar ao topo ↑</a></div></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-content"><div><div class="footer-brand-header"><img class="footer-logo" src="logo.png" alt="Dal Giardino"><span class="footer-brand-name">Dal Giardino</span></div><p class="footer-tagline">Empório, Pizzeria & Trattoria. Uma mesa italiana para encontros que merecem durar.</p></div><nav class="footer-nav" aria-label="Navegação do rodapé"><h4>Descubra</h4><ul><li><a href="#casa">A casa</a></li><li><a href="#menu">Cardápio</a></li><li><a href="#adega">Adega</a></li><li><a href="#cartela-vinhos">Carta de vinhos</a></li><li><a href="#reservas">Reservas</a></li></ul></nav><div class="footer-contact"><h4>Contato</h4><p><a href="tel:+5519983382030">(19) 98338-2030</a></p><p>Rua Abrahim Abraham, 489<br>Americana · SP</p><p><a href="https://www.instagram.com/dalgiardino/" target="_blank" rel="noopener">@dalgiardino</a></p></div></div><div class="footer-bottom"><div class="footer-bottom-flex"><span>© <span id="current-year"></span> Dal Giardino. Todos os direitos reservados.</span><a class="back-to-top" href="#topo">Voltar ao topo ↑</a></div></div></div></footer>
   <script src="script.js"></script>
 </body>
 </html>

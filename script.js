@@ -197,4 +197,96 @@ document.addEventListener("DOMContentLoaded", () => {
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
+
+  // 6. Interatividade e Filtros da Cartela de Vinhos (SOLID: Funções curtas e com responsabilidade única)
+
+  // Determina se um card individual de vinho deve ser exibido
+  function filtrarVinho(card, categoriaSelecionada) {
+    const categoriaCard = card.getAttribute("data-category");
+    const deveExibir = categoriaSelecionada === "todos" || categoriaCard === categoriaSelecionada;
+    
+    if (deveExibir) {
+      card.classList.remove("wine-hidden");
+    } else {
+      card.classList.add("wine-hidden");
+    }
+  }
+
+  // Atualiza o estado visual e atributos ARIA dos botões de filtro
+  function atualizarBotoesFiltro(botoes, botaoAtivo) {
+    botoes.forEach(btn => {
+      const estaAtivo = btn === botaoAtivo;
+      btn.classList.toggle("active", estaAtivo);
+      btn.setAttribute("aria-selected", estaAtivo ? "true" : "false");
+    });
+  }
+
+  // Aplica o filtro selecionado a todos os cards do catálogo
+  function aplicarFiltroVinhos(categoria, cards) {
+    cards.forEach(card => filtrarVinho(card, categoria));
+  }
+
+  // Inicializa os ouvintes de evento dos botões de filtro
+  function inicializarFiltroCartela() {
+    const filterButtons = document.querySelectorAll(".cartela-filter-btn");
+    const wineCards = document.querySelectorAll(".wine-card");
+
+    if (!filterButtons.length || !wineCards.length) return;
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const categoria = btn.getAttribute("data-filter");
+        atualizarBotoesFiltro(filterButtons, btn);
+        aplicarFiltroVinhos(categoria, wineCards);
+      });
+    });
+  }
+
+  // 7. Redirecionamento Suave e Destaque Visual para a Cartela de Vinhos
+
+  // Aplica animação de destaque temporária na cartela
+  function animarDestaqueCartela(secao) {
+    secao.classList.remove("highlight-pulse");
+    // Força reflow para reiniciar animação caso já tenha sido executada
+    void secao.offsetWidth;
+    secao.classList.add("highlight-pulse");
+  }
+
+  // Executa a rolagem suave com compensação para a barra fixa superior
+  function rolarParaCartela(secao) {
+    const cabecalhoAltura = document.querySelector(".site-header")?.offsetHeight || 80;
+    const topbarAltura = document.querySelector(".topbar")?.offsetHeight || 40;
+    const offsetTotal = cabecalhoAltura + topbarAltura + 15;
+    
+    const posicaoAlvo = secao.getBoundingClientRect().top + window.pageYOffset - offsetTotal;
+    window.scrollTo({
+      top: Math.max(0, posicaoAlvo),
+      behavior: "smooth"
+    });
+  }
+
+  // Configura os botões de redirecionamento para a cartela
+  function inicializarRedirecionamentoVinhos() {
+    const gatilhosVinho = document.querySelectorAll('a[href="#cartela-vinhos"]');
+    const secaoCartela = document.getElementById("cartela-vinhos");
+
+    if (!secaoCartela || !gatilhosVinho.length) return;
+
+    gatilhosVinho.forEach(link => {
+      link.addEventListener("click", (evento) => {
+        evento.preventDefault();
+        rolarParaCartela(secaoCartela);
+        animarDestaqueCartela(secaoCartela);
+
+        // Atualiza o histórico de navegação sem recarregar a página
+        if (history.pushState) {
+          history.pushState(null, null, "#cartela-vinhos");
+        }
+      });
+    });
+  }
+
+  inicializarFiltroCartela();
+  inicializarRedirecionamentoVinhos();
 });
+
