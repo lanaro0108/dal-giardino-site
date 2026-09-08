@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener("click", () => {
       const isOpen = navMenu.classList.toggle("open");
       menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
     });
 
     // Fechar ao clicar em qualquer link
@@ -18,7 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", () => {
         navMenu.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
       });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navMenu.classList.contains("open")) {
+        navMenu.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+        menuToggle.focus();
+      }
     });
 
     // Fechar ao clicar fora
@@ -26,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!navMenu.contains(e.target) && !menuToggle.contains(e.target) && navMenu.classList.contains("open")) {
         navMenu.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
       }
     });
   }
@@ -34,7 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabButtons = document.querySelectorAll(".menu-tab-btn");
   const tabPanels = document.querySelectorAll(".menu-panel");
 
-  tabButtons.forEach(button => {
+  tabButtons.forEach((button, buttonIndex) => {
+    button.id = button.id || `menu-tab-${buttonIndex + 1}`;
+    const controlledPanel = document.getElementById(button.getAttribute("aria-controls"));
+    if (controlledPanel) controlledPanel.setAttribute("aria-labelledby", button.id);
+
+    button.addEventListener("keydown", (event) => {
+      const currentIndex = Array.from(tabButtons).indexOf(button);
+      let nextIndex = currentIndex;
+      if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabButtons.length;
+      if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabButtons.length) % tabButtons.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabButtons.length - 1;
+      if (nextIndex !== currentIndex) {
+        event.preventDefault();
+        tabButtons[nextIndex].focus();
+        tabButtons[nextIndex].click();
+      }
+    });
+
     button.addEventListener("click", () => {
       const targetPanelId = button.getAttribute("aria-controls");
 
@@ -65,16 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusBadgeEl = document.getElementById("restaurant-status");
     if (!statusTextEl || !statusBadgeEl) return;
 
-    const now = new Date();
-    // Considerar fuso de São Paulo (UTC-3)
-    const utcHours = now.getUTCHours();
-    const utcMinutes = now.getUTCMinutes();
-    
-    // Horário local de São Paulo
-    let spHours = utcHours - 3;
-    if (spHours < 0) spHours += 24;
-    const currentMinutes = spHours * 60 + utcMinutes;
-    const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+    const saoPauloParts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Sao_Paulo",
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }).formatToParts(new Date());
+    const parts = Object.fromEntries(saoPauloParts.map(part => [part.type, part.value]));
+    const dayOfWeek = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[parts.weekday];
+    const currentMinutes = (Number(parts.hour) % 24) * 60 + Number(parts.minute);
 
     let isOpen = false;
     let message = "";
@@ -157,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   updateRestaurantStatus();
+  window.setInterval(updateRestaurantStatus, 60000);
 
   // 4. Widget de Reserva Rápida via WhatsApp
   const selectPessoas = document.getElementById("reserva-pessoas");
@@ -166,7 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Configurar data mínima como hoje
   if (inputData) {
-    const today = new Date().toISOString().split("T")[0];
+    const dateParts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Sao_Paulo",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(new Date());
+    const dateValues = Object.fromEntries(dateParts.map(part => [part.type, part.value]));
+    const today = `${dateValues.year}-${dateValues.month}-${dateValues.day}`;
     inputData.min = today;
   }
 
@@ -192,90 +230,29 @@ document.addEventListener("DOMContentLoaded", () => {
   if (inputData) inputData.addEventListener("change", updateWhatsAppLink);
   updateWhatsAppLink();
 
+  const eventForm = document.querySelector(".event-form");
+  if (eventForm) {
+    eventForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(eventForm);
+      const mensagem = [
+        "Olá! Gostaria de informações sobre um evento no Dal Giardino.",
+        `Nome: ${formData.get("nome") || "Não informado"}`,
+        `Telefone: ${formData.get("telefone") || "Não informado"}`,
+        `E-mail: ${formData.get("email") || "Não informado"}`,
+        `Convidados: ${formData.get("convidados") || "Não informado"}`,
+        `Detalhes: ${formData.get("text") || "Não informado"}`
+      ].join("\n");
+      const whatsappUrl = `https://wa.me/5519983382030?text=${encodeURIComponent(mensagem)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+  }
+
   // 5. Ano Atual no Rodapé
   const yearEl = document.getElementById("current-year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // 6. Interatividade e Filtros da Carta de Vinhos (SOLID: Funções curtas e com responsabilidade única)
-
-  // Determina se um item individual de vinho deve ser exibido
-  function filtrarVinho(item, categoriaSelecionada) {
-    const categoriaItem = item.getAttribute("data-category");
-    const deveExibir = categoriaSelecionada === "todos" || categoriaItem === categoriaSelecionada;
-    
-    if (deveExibir) {
-      item.classList.remove("wine-hidden");
-    } else {
-      item.classList.add("wine-hidden");
-    }
-  }
-
-  // Atualiza o estado visual e semântico dos botões da carta
-  function atualizarBotoesFiltro(botoes, botaoAtivo) {
-    botoes.forEach(btn => {
-      btn.classList.toggle("active", btn === botaoAtivo);
-    });
-  }
-
-  // Aplica o filtro selecionado a todos os rótulos
-  function aplicarFiltroVinhos(categoria, itens) {
-    itens.forEach(item => filtrarVinho(item, categoria));
-  }
-
-  // Inicializa a filtragem por categoria na carta de vinhos
-  function inicializarFiltroCartela() {
-    const filterButtons = document.querySelectorAll(".cartela-filter-btn");
-    const wineItems = document.querySelectorAll(".wine-item");
-
-    if (!filterButtons.length || !wineItems.length) return;
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const categoria = btn.getAttribute("data-filter");
-        atualizarBotoesFiltro(filterButtons, btn);
-        aplicarFiltroVinhos(categoria, wineItems);
-      });
-    });
-  }
-
-  // 7. Redirecionamento Suave para a Carta de Vinhos
-
-  // Executa a rolagem suave com compensação para o cabeçalho fixo
-  function rolarParaCartela(secao) {
-    const cabecalhoAltura = document.querySelector(".site-header")?.offsetHeight || 80;
-    const topbarAltura = document.querySelector(".topbar")?.offsetHeight || 40;
-    const offsetTotal = cabecalhoAltura + topbarAltura + 10;
-    
-    const posicaoAlvo = secao.getBoundingClientRect().top + window.pageYOffset - offsetTotal;
-    window.scrollTo({
-      top: Math.max(0, posicaoAlvo),
-      behavior: "smooth"
-    });
-  }
-
-  // Configura os links que direcionam para a carta de vinhos
-  function inicializarRedirecionamentoVinhos() {
-    const gatilhosVinho = document.querySelectorAll('a[href="#cartela-vinhos"]');
-    const secaoCartela = document.getElementById("cartela-vinhos");
-
-    if (!secaoCartela || !gatilhosVinho.length) return;
-
-    gatilhosVinho.forEach(link => {
-      link.addEventListener("click", (evento) => {
-        evento.preventDefault();
-        rolarParaCartela(secaoCartela);
-
-        // Atualiza a URL sem recarregar a página
-        if (history.pushState) {
-          history.pushState(null, null, "#cartela-vinhos");
-        }
-      });
-    });
-  }
-
-  inicializarFiltroCartela();
-  inicializarRedirecionamentoVinhos();
 });
 
