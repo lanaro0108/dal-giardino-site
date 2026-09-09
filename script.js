@@ -248,25 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 5. Filtro da Carta de Vinhos ("Cartela de Vinhos")
-  const filterButtons = document.querySelectorAll(".cartela-filter-btn");
-  const wineItems = document.querySelectorAll(".wine-item");
-
-  filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      const filter = button.getAttribute("data-filter");
-
-      filterButtons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      wineItems.forEach(item => {
-        const matches = filter === "todos" || item.getAttribute("data-category") === filter;
-        item.style.display = matches ? "" : "none";
-      });
-    });
-  });
-
-  // 6. Ano Atual no Rodapé
+  // 5. Ano Atual no Rodapé
   const yearEl = document.getElementById("current-year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
